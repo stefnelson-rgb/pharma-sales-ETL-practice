@@ -1,0 +1,1 @@
+SELECT * FROM pharma_sales_daily;
