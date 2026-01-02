@@ -1,3 +1,5 @@
+> **Project Status:** Active development. This repository is still being expanded
+
 # Pharma Sales ETL Pipeline
 
 ## A hands‑on data engineering project using real‑world pharma sales logic
