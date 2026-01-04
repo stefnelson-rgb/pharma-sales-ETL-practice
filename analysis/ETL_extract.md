@@ -40,18 +40,18 @@ SET month_number = CASE
 etc...
 
 
-## ETL
-# Cleaning of data:
+# ETL
+## Cleaning of data:
 I checked for missing mandatory fields, invalid dates, duplicates, Standardized date formats and normalized product names
 
 
 
-# Create a staging table for Pharma_sales
+## Create a staging table for Pharma_sales
 To avoid transforming the raw dataset directly, I created a **staging table** named `stg_sales` and loaded it with the same records from the original `pharma_sales` table. The staging layer serves as an intermediate workspace where data can be standardized and cleaned before loading it into the dimensional model. The raw dataset includes *Latitude* and *Longitude*, but these fields are not required for any analytical use case in the warehouse. Since no geographic dimension is being modeled, these columns are intentionally excluded from the staging table to keep the schema focused and efficient
 
 
 
-# Create Dimension Tables
+## Create Dimension Tables
 To support a star schema and improve analytical performance, I created 4 **dimension tables**. Each dimension isolates a specific business entity from the original dataset, enabling cleaner joins and more efficient queries
 
 - `dim_date`: This table stores temporal attributes used for time‑based analysis. It includes:
@@ -87,7 +87,7 @@ To support a star schema and improve analytical performance, I created 4 **dimen
     - team
 
 
-## Created a fact table
+## Create the fact table
 
 
 ### Calculate derived metrics
@@ -97,7 +97,7 @@ To support a star schema and improve analytical performance, I created 4 **dimen
 ### Sum comparison
 
 
-# Create the fact table
+
 
 
 
