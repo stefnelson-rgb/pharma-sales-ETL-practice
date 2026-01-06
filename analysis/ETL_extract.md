@@ -119,6 +119,8 @@ Adding foreign key constraints is good practice because it:
 
 Overall, the fact table acts as the numerical core of the model, while the dimension tables provide the descriptive context. The foreign keys and joins together create a clean, well‑structured star schema suitable for reporting and analytics.
 
+
+
 ### Calculate derived metrics
 
 ## Data Reconciliation Queries (ETL Testing)
