@@ -86,9 +86,38 @@ To support a star schema and improve analytical performance, I created 4 **dimen
     - manager
     - team
 
+> Issues: While assembing the fact table i realised that I didn't make the dimension tables with DISTINCT, so i didn't have unique values to make the JOIN. I had to re do the dim tables. 
 
-## Create the fact table
 
+## Fact Table Creation
+The fact table is the central component of the star schema. It stores the **quantitative, numerical measures** of the business process, in this case, sales metrics such as `quantity`, `price`, and `sales`. These measures are recorded at the lowest level of detail available in the dataset (one row per transaction).
+
+To make the fact table analytically useful, I included **foreign keys** that link each fact row to the corresponding dimension tables:
+
+- `date_id` → `dim_date`
+- `product_id` → `dim_product`
+- `customer_id` → `dim_customer`
+- `rep_id` → `dim_rep`
+
+These foreign keys allow the fact table to be enriched with descriptive attributes (for example: product class, customer city, sales rep team) without duplicating that information inside the fact table. This keeps the schema normalized, efficient, and easy to query.
+
+
+### Why the joins were necessary
+When loading the fact table, I used joins to *look up* the surrogate keys from each dimension. Each dimension contains one unique row per business entity, so the join ensures that every transaction in the fact table is linked to the correct dimension entry.
+
+#### Why I used LEFT JOINs
+LEFT JOINs ensure that every sales record from the source data is preserved, even if a matching dimension row is missing. 
+
+
+### Why including foreign keys
+Adding foreign key constraints is good practice because it:
+
+- Enforces referential integrity between the fact table and dimensions.
+- Prevents orphaned fact rows that reference non‑existent dimension entries.
+- Ensures the star schema remains consistent as data grows.
+- Makes analytical queries more reliable and predictable.
+
+Overall, the fact table acts as the numerical core of the model, while the dimension tables provide the descriptive context. The foreign keys and joins together create a clean, well‑structured star schema suitable for reporting and analytics.
 
 ### Calculate derived metrics
 
